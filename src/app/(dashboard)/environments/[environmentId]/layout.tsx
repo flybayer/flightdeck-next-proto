@@ -1,10 +1,8 @@
-"use client";
 import Link from "next/link";
 import styles from "@/app/(dashboard)/page.module.css";
 import { Client } from "@/components/Client";
-import { AnimatePresence } from "@/components/AnimatePresence";
 import { SideMenu } from "@/components/SideMenu";
-import { motion } from "framer-motion";
+import ClientSidebar from "./services/ClientSidebar";
 
 export default function EnvLayout({
   children,
@@ -16,11 +14,7 @@ export default function EnvLayout({
     <>
       <Client className="flex h-full">
         <SideMenu />
-        <motion.div
-          animate
-          layout
-          className={styles.main + " bg-gray-200 flex-1"}
-        >
+        <main className={styles.main + " bg-gray-200 flex-1"}>
           <div className="space-y-4">
             <div>Environment {params.environmentId}</div>
             <div className="space-x-4 flex">
@@ -43,8 +37,8 @@ export default function EnvLayout({
               </p>
             </div>
           </div>
-        </motion.div>
-        <AnimatePresence>{children}</AnimatePresence>
+        </main>
+        <ClientSidebar>{children}</ClientSidebar>
       </Client>
     </>
   );
